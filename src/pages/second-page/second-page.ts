@@ -12,12 +12,18 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'second-page.html'
 })
 export class SecondPagePage {
+  username: string;
+  password: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SecondPagePage');
     console.log('name=', this.navParams.get('message'));
+  }
+
+  login() {
+    console.log('login:', this.username, this.password);
   }
 
 }

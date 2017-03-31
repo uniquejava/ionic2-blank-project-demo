@@ -57,7 +57,7 @@ Modal和Page一样创建,只是不是通过nav.pop呈现, 也非nav.setRoot而�
 
 ## sidemenu
 1)在RootComponent上加上icon-menu, `[content]`指定sidemenu绑定的content area.
-使用`#content`给ion-nav或ion-tabs给定一个别名,他们就是实际的content area.
+使用`#content`引用ion-nav或ion-tabs,他们就是实际的content area.
 ```html
 <ion-menu [content]="content">
   <ion-content>
@@ -118,7 +118,54 @@ export class MyApp {
       My Friends
     </ion-title>
 ```
-    
+## Simple Form
+见SecondPage
+form标签都不需要, 在input控件上用双向绑定: `<ion-input value="" [(ngModel)]="username"></ion-input>`,然后在ts中使用username.
+
+## FormBuilder.group [formGroup]="myForm" formControlName="field1"
+见ThirdPage, 比较简单, 直接上代码
+html
+```html
+  <form [formGroup]="myForm" (submit)="saveForm($event)">
+    <ion-item>
+      <ion-label stacked>Field 1</ion-label>
+      <ion-input formControlName="field1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Field 2</ion-label>
+      <ion-input formControlName="field2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Field 2</ion-label>
+      <ion-input formControlName="field2"></ion-input>
+    </ion-item>
+
+    <button ion-button type="submit">Save Form</button>
+  </form>
+
+```
+
+ts数组中的第一个元素是input的初始值, 第二个是validator(可以是数组)
+```js
+export class ThirdPage {
+  myForm: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder) {
+    this.myForm = formBuilder.group({
+      field1: ['', Validators.required],
+      field2: ['', Validators.required],
+      field3: [''],
+    });
+  }
+  saveForm(event) {
+    event.preventDefault();
+    console.log(this.myForm.value);
+  }
+
+}
+
+```
+
     
 ## ng命令自动生成的routes模板
 ```ts

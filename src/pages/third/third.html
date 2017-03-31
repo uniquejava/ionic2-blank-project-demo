@@ -18,4 +18,21 @@
 
 <ion-content padding>
 
+  <form [formGroup]="myForm" (submit)="saveForm($event)">
+    <ion-item>
+      <ion-label stacked>Field 1</ion-label>
+      <ion-input formControlName="field1"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Field 2</ion-label>
+      <ion-input formControlName="field2"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Field 2</ion-label>
+      <ion-input formControlName="field2"></ion-input>
+    </ion-item>
+
+    <button ion-button type="submit">Save Form</button>
+  </form>
+
 </ion-content>
