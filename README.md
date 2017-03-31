@@ -55,8 +55,73 @@ Modal和Page一样创建,只是不是通过nav.pop呈现, 也非nav.setRoot而�
 ## blank 和 tabs的区别
 只有一个区别: app.html中的ion-nav变成了ion-tabs, 前者只能指定一个root, 后者可以指定多个root. 各个root都会通过push/pop维护自己的nav history.
 
+## sidemenu
+1)在RootComponent上加上icon-menu, `[content]`指定sidemenu绑定的content area.
+使用`#content`给ion-nav或ion-tabs给定一个别名,他们就是实际的content area.
+```html
+<ion-menu [content]="content">
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="openPage(rootPage)">Home</button>
+      <button ion-item (click)="openPage(rootPage2)">Second</button>
+      <button ion-item (click)="openPage(rootPage3)">Third</button>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<!--<ion-nav #content [root]="rootPage"></ion-nav>-->
+<ion-tabs #content>
+  <ion-tab [root]="rootPage" tabTitle="Tab 1" tabIcon="navigate"></ion-tab>
+  <ion-tab [root]="rootPage2" tabTitle="Tab 2" tabIcon="person"></ion-tab>
+  <ion-tab [root]="rootPage3" tabTitle="Tab 3" tabIcon="bookmarks"></ion-tab>
+</ion-tabs>
+
+```
+在RootComponent上,不能使用直接注入NavController, 会报错, 要使用如下方式
+```ts
+@Component({
+  templateUrl: 'app.html'
+})
+export class MyApp {
+  rootPage:any = HomePage;
+  rootPage2:any = SecondPagePage;
+  rootPage3:any = ThirdPage;
+
+  @ViewChild(Nav) nav: Nav;
+
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+    platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+      statusBar.styleDefault();
+      splashScreen.hide();
+    });
+  }
+
+  openPage(page) {
+    this.nav.setRoot(page);
+  }
+}
+
+```
+
+2)在需要显示侧边栏的page中加上相应的汉堡按钮(用menuToggle标识)
+```html
+<ion-header>
+  <ion-navbar color="secondary">
+
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    
+    <ion-title>
+      My Friends
+    </ion-title>
+```
+    
+    
 ## ng命令自动生成的routes模板
-```bash
+```ts
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
