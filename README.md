@@ -224,6 +224,26 @@ useIonicStorage(){
 }
 ```
 
+## 使用Ionic native
+ionic native只是对cordova plugin做了一层简单的封装, 让插件对typescript更加友好(不必declare var)
+需要使用对等的两条命令进行安装: cordova plugin + ionic native包, 以geolocation为例.
+
+```bash
+ionic plugin add cordova-plugin-geolocation
+npm install @ionic-native/geolocation --save
+```
+然后将import {Geolocation} from '@ionic-native/geolocation'扔到providers里,再注入到MyProvider就可以了.
+this.geolocation.getCurrentPosition().then(...);
+
+需要ionic build ios,然后打开xcode跑一遍,最后再通过`ionic run ios -c -s --device`测试报错:
+xcrun: error: unable to find utility “PackageApplication”, not a developer tool or in PATH
+
+参见(升级Xcode8.3带来的新问题)
+http://stackoverflow.com/questions/43068608/xcrun-error-unable-to-find-utility-packageapplication-not-a-developer-tool
+
+暂时直接使用Xcode进行真机测试.
+
+
 ## ng命令自动生成的routes模板
 ```ts
 import { NgModule } from '@angular/core';

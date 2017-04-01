@@ -5,6 +5,8 @@ import { HomePage } from '../pages/home/home';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {Geolocation} from '@ionic-native/geolocation';
+import {Camera} from '@ionic-native/camera';
 import {MyComponent} from "../components/my/my";
 import {MyDirective} from "../components/my-directive/my-directive";
 import {MyPipe} from "../pipes/my-pipe";
@@ -38,6 +40,8 @@ import {IonicStorageModule} from "@ionic/storage";
     ThirdPage
   ],
   providers: [
+    Geolocation,
+    Camera,
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},

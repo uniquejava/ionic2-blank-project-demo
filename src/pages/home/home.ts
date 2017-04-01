@@ -63,4 +63,20 @@ export class HomePage {
     })
   }
 
+  testGeolocation() {
+    this.myProvider.getCurrentPosition().then(data => {
+      alert(JSON.stringify(data));
+    }).catch(error => {
+      alert(JSON.stringify(error));
+    })
+  }
+
+  testCamera() {
+    this.myProvider.getPicture().then(data => {
+      console.log(data);
+    }).catch(error => {
+      console.log(error);
+      alert(error);
+    })
+  }
 }

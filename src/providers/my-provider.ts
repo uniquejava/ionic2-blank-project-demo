@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Storage} from '@ionic/storage';
-
+import {Geolocation} from '@ionic-native/geolocation';
+import {Camera} from "@ionic-native/camera";
 /*
  Generated class for the MyProvider provider.
 
@@ -14,7 +15,7 @@ declare var sqlitePlugin;
 export class MyProvider {
   data: any;
 
-  constructor(public http: Http, public storage: Storage) {
+  constructor(public http: Http, public storage: Storage, public geolocation: Geolocation, public camera: Camera) {
     console.log('Hello MyProvider Provider');
   }
 
@@ -60,5 +61,13 @@ createSqlLiteDb() {
     return this.storage.get('hello');
   }
 
+  getCurrentPosition() {
+    return this.geolocation.getCurrentPosition();
+  }
+
+
+  getPicture(){
+    return this.camera.getPicture();
+  }
 
 }
