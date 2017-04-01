@@ -57,4 +57,10 @@ export class HomePage {
     });
   }
 
+  testIonicStorage() {
+    this.myProvider.useIonicStorage().then(data => {
+      alert(data);
+    })
+  }
+
 }

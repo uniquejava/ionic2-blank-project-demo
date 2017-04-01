@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
+import {Storage} from '@ionic/storage';
 
 /*
  Generated class for the MyProvider provider.
@@ -13,7 +14,7 @@ declare var sqlitePlugin;
 export class MyProvider {
   data: any;
 
-  constructor(public http: Http) {
+  constructor(public http: Http, public storage: Storage) {
     console.log('Hello MyProvider Provider');
   }
 
@@ -52,6 +53,12 @@ createSqlLiteDb() {
     });
   })
 }
+
+
+  useIonicStorage(){
+    this.storage.set('hello', 'world');
+    return this.storage.get('hello');
+  }
 
 
 }

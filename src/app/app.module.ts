@@ -12,6 +12,7 @@ import {MyProvider} from "../providers/my-provider";
 import {SecondPagePage} from "../pages/second-page/second-page";
 import {ModalPage} from "../pages/modal/modal";
 import {ThirdPage} from "../pages/third/third";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {ThirdPage} from "../pages/third/third";
     MyPipe
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

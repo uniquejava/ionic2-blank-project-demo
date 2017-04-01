@@ -212,6 +212,18 @@ createSqlLiteDb() {
 
 ```
 
+**IonicStorage**: 
+ionic storage和localStorage不一样, get方法返回的是Promise. ionic storage根据当前环境自动选择不同的技术进行数据存储.
+```js
+imports: [IonicModule.forRoot(MyApp), IonicStorageModule.forRoot()]
+
+import {Storage} from '@ionic/storage';
+useIonicStorage(){
+  this.storage.set('hello', 'world');
+  return this.storage.get('hello');
+}
+```
+
 ## ng命令自动生成的routes模板
 ```ts
 import { NgModule } from '@angular/core';
