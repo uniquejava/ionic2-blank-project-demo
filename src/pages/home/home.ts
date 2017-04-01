@@ -6,7 +6,8 @@ import {SecondPagePage} from "../second-page/second-page";
 import {ModalPage} from "../modal/modal";
 
 class Friend {
-  constructor(public name: string, public description: string, public picture: string) {}
+  constructor(public name: string, public description: string, public picture: string) {
+  }
 }
 
 @Component({
@@ -46,6 +47,14 @@ export class HomePage {
     });
 
     myModal.present();
+  }
+
+  testSqlite() {
+    this.myProvider.createSqlLiteDb().then(function (res) {
+      alert(JSON.stringify(res));
+    }).catch(function (err) {
+      alert(err);
+    });
   }
 
 }

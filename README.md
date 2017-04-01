@@ -166,7 +166,52 @@ export class ThirdPage {
 
 ```
 
-    
+## theme
+找图标: https://ionicframework.com/docs/ionicons/
+
+ion-label有fixed(左右排列)和stack(上下排列)两种风格
+
+## storage
+
+**localStorage**: 最多存储5M的数据
+```js
+// set
+localStorage.setItem('key1', 'value1');
+// get
+let value = localStorage.getItem('key1');
+```
+
+**SQLLITE**(需要在设备上测试)
+
+ionic plugin add https://github.com/litehelpers/Cordova-sqlite-storage
+
+用法见my-provider.ts以及github上的README.
+
+```js
+declare var sqlitePlugin;
+createSqlLiteDb() {
+  return new Promise(function (resolve, reject) {
+    let db = sqlitePlugin.openDatabase({name: 'demo.db', location: 'default'});
+    db.transaction(function (tx) {
+      tx.executeSql('drop table if exists test_table');
+      tx.executeSql('create table if not exists test_table (id integer primary key, data text, data_num integer)');
+      tx.executeSql('insert into test_table(data, data_num) values(?,?)', ['test', 100], function (tx, res) {
+        console.log('insertId: ', res.insertId, ' -- probably 1');
+        console.log('rowsAffected: ', res.rowsAffected, ' -- should be 1');
+
+        resolve(res)
+      }, function (e) {
+        console.log('ERROR: ', e.message);
+
+        reject('ERROR: ' + e.message);
+      });
+
+    });
+  })
+}
+
+```
+
 ## ng命令自动生成的routes模板
 ```ts
 import { NgModule } from '@angular/core';
